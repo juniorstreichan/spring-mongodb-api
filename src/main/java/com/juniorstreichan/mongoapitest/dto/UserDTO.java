@@ -1,33 +1,31 @@
-package com.juniorstreichan.mongoapitest.domain;
+package com.juniorstreichan.mongoapitest.dto;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import com.juniorstreichan.mongoapitest.domain.User;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-@Document(collection = "user")
-public class User implements Serializable {
+public class UserDTO implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    @Id
+
     private String id;
     private String nome;
     private String email;
 
-
-    public User() {
-    }
-
-    public User(String id, String nome, String email) {
+    public UserDTO(String id, String nome, String email) {
         this.id = id;
         this.nome = nome;
         this.email = email;
     }
 
-    public User(String nome, String email) {
+    public UserDTO(User usr) {
+        this.id = usr.getId();
+        this.nome = usr.getNome();
+        this.email = usr.getEmail();
+    }
 
-        this.nome = nome;
-        this.email = email;
+    public UserDTO() {
     }
 
 
@@ -59,8 +57,8 @@ public class User implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
+        UserDTO userDTO = (UserDTO) o;
+        return Objects.equals(id, userDTO.id);
     }
 
     @Override

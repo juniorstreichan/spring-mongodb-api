@@ -1,6 +1,7 @@
 package com.juniorstreichan.mongoapitest.resources;
 
 import com.juniorstreichan.mongoapitest.domain.User;
+import com.juniorstreichan.mongoapitest.dto.UserDTO;
 import com.juniorstreichan.mongoapitest.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/users")
@@ -18,8 +20,8 @@ public class UserResource {
     private UserService service;
 
     @GetMapping
-    public ResponseEntity<Collection<User>> findAll() {
-        Collection<User> ret = service.findAll();
+    public ResponseEntity<Collection<UserDTO>> findAll() {
+        Collection<UserDTO> ret = service.findAll().stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
         return ResponseEntity.ok().body(ret);
     }
 
