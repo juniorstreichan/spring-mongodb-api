@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Objects;
+
 @Document(collection = "user")
 public class User {
 
@@ -18,6 +19,12 @@ public class User {
 
     public User(String id, String nome, String email) {
         this.id = id;
+        this.nome = nome;
+        this.email = email;
+    }
+
+    public User(String nome, String email) {
+
         this.nome = nome;
         this.email = email;
     }
