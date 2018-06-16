@@ -1,9 +1,13 @@
 package com.juniorstreichan.mongoapitest.domain;
 
-import java.util.Objects;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Objects;
+@Document(collection = "user")
 public class User {
 
+    @Id
     private String id;
     private String nome;
     private String email;
