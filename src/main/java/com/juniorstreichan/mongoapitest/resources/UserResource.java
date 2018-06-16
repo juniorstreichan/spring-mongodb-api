@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @RestController
@@ -14,8 +15,13 @@ import java.util.Set;
 public class UserResource {
 
     @GetMapping
-    public ResponseEntity<Set<User>> findAll(){
-        
+    public ResponseEntity<Set<User>> findAll() {
+        Set<User> ret = new HashSet<>();
+
+        ret.add(new User("123", "Maria neta", "maria@neta.com"));
+        ret.add(new User("999", "Maria vó", "maria@vo.com"));
+
+        return ResponseEntity.ok().body(ret);
     }
 
 
