@@ -1,5 +1,6 @@
 package com.juniorstreichan.mongoapitest.domain;
 
+import com.juniorstreichan.mongoapitest.dto.UserDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -22,6 +23,12 @@ public class User implements Serializable {
         this.id = id;
         this.nome = nome;
         this.email = email;
+    }
+
+    public User(UserDTO usr) {
+        this.id = usr.getId();
+        this.nome = usr.getNome();
+        this.email = usr.getEmail();
     }
 
     public User(String nome, String email) {
