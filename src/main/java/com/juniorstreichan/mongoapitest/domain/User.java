@@ -4,6 +4,8 @@ import com.juniorstreichan.mongoapitest.dto.UserDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -12,7 +14,11 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private String id;
+    @NotEmpty
     private String nome;
+
+    @Email
+    @NotEmpty
     private String email;
 
 
