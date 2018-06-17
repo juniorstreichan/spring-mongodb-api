@@ -29,5 +29,14 @@ public class UserService {
         return repo.insert(obj);
     }
 
+    public void delete(String id){
+        User obj = findById(id);
+        delete(obj);
+    }
+
+    private void delete(User obj) {
+        repo.deleteById(obj.getId());
+    }
+
 
 }
