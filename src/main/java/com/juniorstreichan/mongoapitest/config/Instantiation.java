@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 
-@Configuration
+@Configuration(value = "test")
 public class Instantiation implements CommandLineRunner {
 
 
