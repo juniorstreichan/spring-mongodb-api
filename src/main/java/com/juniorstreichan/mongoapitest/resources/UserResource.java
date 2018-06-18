@@ -1,5 +1,6 @@
 package com.juniorstreichan.mongoapitest.resources;
 
+import com.juniorstreichan.mongoapitest.domain.Post;
 import com.juniorstreichan.mongoapitest.domain.User;
 import com.juniorstreichan.mongoapitest.dto.UserDTO;
 import com.juniorstreichan.mongoapitest.services.UserService;
@@ -26,7 +27,7 @@ public class UserResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<UserDTO> findById(@PathVariable String id) {
+    public ResponseEntity<UserDTO> findById(@PathVariable("id") String id) {
         User usr = service.findById(id);
         return ResponseEntity.ok().body(new UserDTO(usr));
     }
@@ -45,18 +46,23 @@ public class UserResource {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable String id) {
+    public ResponseEntity<Void> delete(@PathVariable("id") String id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UserDTO> update(@RequestBody UserDTO objDTO, @PathVariable String id) {
+    public ResponseEntity<UserDTO> update(@RequestBody UserDTO objDTO, @PathVariable("id") String id) {
         User obj = new User(objDTO);
         obj.setId(id);
-        obj = service.update(obj);
+        service.update(obj);
         return ResponseEntity.noContent().build();
+    }
 
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<Collection<Post>> findPosts(@PathVariable("id") String id) {
+        User usr = service.findById(id);
+        return ResponseEntity.ok().body(usr.getPosts());
     }
 
 }
