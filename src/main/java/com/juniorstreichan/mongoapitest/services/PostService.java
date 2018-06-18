@@ -7,6 +7,9 @@ import com.juniorstreichan.mongoapitest.services.exception.ObjNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 @Service
 public class PostService {
 
@@ -18,6 +21,10 @@ public class PostService {
                 .orElseThrow(
                         () -> new ObjNotFound("Post não encontrado")
                 );
+    }
+
+    public Collection<Post> findByTitle(String title) {
+        return new HashSet<>(repo.findByTitleContainingIgnoreCaseOrderByDateDesc(title));
     }
 
 }
