@@ -2,11 +2,14 @@ package com.juniorstreichan.mongoapitest.domain;
 
 import com.juniorstreichan.mongoapitest.dto.UserDTO;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 
 @Document(collection = "user")
@@ -20,6 +23,9 @@ public class User implements Serializable {
     @Email
     @NotEmpty
     private String email;
+
+    @DBRef(lazy = true)
+    private Collection<Post> posts = new HashSet<>();
 
 
     public User() {
@@ -67,6 +73,10 @@ public class User implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Collection<Post> getPosts() {return posts; }
+
+    public void setPosts(Collection<Post> posts) { this.posts = posts;}
 
     @Override
     public boolean equals(Object o) {
