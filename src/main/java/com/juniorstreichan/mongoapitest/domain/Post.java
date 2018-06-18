@@ -2,11 +2,14 @@ package com.juniorstreichan.mongoapitest.domain;
 
 
 import com.juniorstreichan.mongoapitest.dto.AuthorDTO;
+import com.juniorstreichan.mongoapitest.dto.CommentDTO;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Objects;
 
 @Document
@@ -20,6 +23,7 @@ public class Post implements Serializable {
     private String title;
     private String body;
     private AuthorDTO author;
+    private Collection<CommentDTO> comments = new HashSet<>();
 
 
     public Post() {
@@ -68,6 +72,11 @@ public class Post implements Serializable {
     public AuthorDTO getAuthor() {
         return author;
     }
+
+
+    public Collection<CommentDTO> getComments() {return comments;}
+
+    public void setComments(Collection<CommentDTO> comments) {this.comments = comments;}
 
     public void setAuthor(AuthorDTO author) {
         this.author = author;

@@ -2,9 +2,12 @@ package com.juniorstreichan.mongoapitest.dto;
 
 import com.juniorstreichan.mongoapitest.domain.User;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class AuthorDTO {
+public class AuthorDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
+
 
     private String id;
     private String nome;

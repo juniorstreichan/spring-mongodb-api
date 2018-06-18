@@ -3,6 +3,7 @@ package com.juniorstreichan.mongoapitest.config;
 import com.juniorstreichan.mongoapitest.domain.Post;
 import com.juniorstreichan.mongoapitest.domain.User;
 import com.juniorstreichan.mongoapitest.dto.AuthorDTO;
+import com.juniorstreichan.mongoapitest.dto.CommentDTO;
 import com.juniorstreichan.mongoapitest.repositories.PostRepository;
 import com.juniorstreichan.mongoapitest.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,12 +61,33 @@ public class Instantiation implements CommandLineRunner {
                 "Acordei para teste",
                 new AuthorDTO(ze)
         );
+
+
+
+        post1.getComments().addAll(Arrays.asList(
+                new CommentDTO(
+                        "To nem ai",
+                        LocalDate.parse("21/03/2018", dateFormat),
+                        new AuthorDTO(mano)),
+                new CommentDTO(
+                        "traz muamba pra mim !!",
+                        LocalDate.parse("22/03/2018", dateFormat),
+                        new AuthorDTO(ronald))
+        ));
+
+
+        post2.getComments().addAll(Arrays.asList(
+                new CommentDTO(
+                        "Eita!",
+                        LocalDate.parse("21/03/2018", dateFormat),
+                        new AuthorDTO(mano))
+        ));
+
         postRepository.saveAll(Arrays.asList(
                 post1,
                 post2
         ));
-
-        ze.getPosts().addAll(Arrays.asList(post1,post2));
+        ze.getPosts().addAll(Arrays.asList(post1, post2));
 
         userRepository.save(ze);
 
