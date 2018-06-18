@@ -26,5 +26,7 @@ public class PostService {
     public Collection<Post> findByTitle(String title) {
         return new HashSet<>(repo.findByTitleContainingIgnoreCaseOrderByDateDesc(title));
     }
-
+    public Collection<Post> findByBoby(String title) {
+        return new HashSet<>(repo.findBody(title));
+    }
 }

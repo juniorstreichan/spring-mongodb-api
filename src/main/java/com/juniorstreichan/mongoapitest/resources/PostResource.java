@@ -23,10 +23,17 @@ public class PostResource {
         return ResponseEntity.ok().body(pst);
     }
 
-    @GetMapping(value = "/search")
+    @GetMapping(value = "/searchtitle")
     public ResponseEntity<Collection<Post>> findByTitle(@RequestParam(value = "title", defaultValue = "") String title) {
         title = URL.decodeParam(title);
         Collection<Post> ret = service.findByTitle(title);
+        return ResponseEntity.ok().body(ret);
+    }
+
+    @GetMapping(value = "/searchbody")
+    public ResponseEntity<Collection<Post>> findByBody(@RequestParam(value = "body", defaultValue = "") String title) {
+        title = URL.decodeParam(title);
+        Collection<Post> ret = service.findByBoby(title);
         return ResponseEntity.ok().body(ret);
     }
 
