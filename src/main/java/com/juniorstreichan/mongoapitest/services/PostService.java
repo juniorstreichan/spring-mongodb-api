@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 
 @Service
@@ -26,7 +27,13 @@ public class PostService {
     public Collection<Post> findByTitle(String title) {
         return new HashSet<>(repo.findByTitleContainingIgnoreCaseOrderByDateDesc(title));
     }
+
     public Collection<Post> findByBoby(String title) {
         return new HashSet<>(repo.findBody(title));
+    }
+
+    public Collection<Post> fullSearch(String text, Date minDate, Date maxDate) {
+        maxDate = new Date(maxDate.getTime() + (24 * 60 * 60 * 1000));
+        return new HashSet<>(repo.fullSerach(text, minDate, maxDate));
     }
 }

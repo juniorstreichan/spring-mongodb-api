@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.Date;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/posts")
@@ -35,6 +37,20 @@ public class PostResource {
         title = URL.decodeParam(title);
         Collection<Post> ret = service.findByBoby(title);
         return ResponseEntity.ok().body(ret);
+    }
+    @GetMapping(value = "/fullsearch")
+    public ResponseEntity<Collection<Post>> fullSearch(
+            @RequestParam(value = "text" ,defaultValue = "") String text,
+            @RequestParam(value = "minDate" ,defaultValue = "") String minDate,
+            @RequestParam(value = "maxDate" ,defaultValue = "") String maxDate
+            ) {
+
+        text = URL.decodeParam(text);
+        Date min = URL.convertDate(minDate,new Date(0L));
+        Date max = URL.convertDate(maxDate,new Date());
+        Collection<Post> list= service.fullSearch(text,min,max);
+        return ResponseEntity.ok().body(list);
+
     }
 
 
